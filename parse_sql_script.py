@@ -9,34 +9,6 @@ sql_file = "/home/motaz/Downloads/wiki/arzwiki-20170120-langlinks.sql"
 #sql_file = "/home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql"
 
 
-def read_sql_dump(dump_filename, target_table):
-    records = list()
-    fast_forward = True
-    with open(dump_filename, 'r', encoding='utf-8', errors='replace') as f:
-        for line in f:
-            line = line.strip()
-            if line.lower().startswith('insert') and target_table in line:
-                fast_forward = False
-            if fast_forward:
-                continue
-            data = line.split('),')
-            print(data)
-            for d in data:
-                try:
-                    print(d)
-                    #newline = d.strip(' ()')
-                    #newline = newline.replace('`', '')
-                    #print(newline.split(','))
-                    #print(len(newline.strip().split(',')))
-                    #row = newline.strip().split(',')
-                    records.append([d[0], d[1], d[3]])
-                except IndexError:
-                    pass
-            if line.endswith(';'):
-                break
-    #sio.seek(0)
-    return records
-
 
 def read_dump(dump_filename, target_table):
     #sio = StringIO()
@@ -70,12 +42,46 @@ def read_dump(dump_filename, target_table):
 
 
 
-data = read_sql_dump(dump_filename=sql_file, target_table='langlinks')
+def read_sql_dump(dump_filename):
+    sio = StringIO()
+    records = list()
+    with open(dump_filename, 'r', encoding='utf-8', errors='replace') as f:
+        for line in f:
+            if line.startswith('INSERT INTO `langlinks` VALUES '):
+                line = line.strip()
+                line = line.replace('INSERT INTO `langlinks` VALUES ', '')
+                line = line.replace(");", "),")
+                data = line.replace('),', '\n').split('\n')
+                #print(data)
+                for d in data:
+                    try:
+                        record = d[1:]
+                        #print(record)
+                        #newline = d.strip(' ()')
+                        #newline = newline.replace('`', '')
+                        #print(newline.split(','))
+                        #print(len(newline.strip().split(',')))
+                        #row = newline.strip().split(',')
+                        #records.append([d[0], d[1], d[3]])
+                        sio.write(record)
+                        sio.write("\n")
+                    except BaseException as error:
+                        print('error: {0}'.format(error))
+                        pass
+    sio.seek(0)
+    return sio
+    #return records
+
+
+data = read_sql_dump(dump_filename=sql_file)
+
+
 #print(arz_langlinks_csv.readlines())
 #df_arz_langlinks = pd.DataFrame(data=data, columns=['ll_from', 'll_lang', 'll_title'])
 #print(df_arz_langlinks)
 
-
+df =pd.read_csv(data)
+print(df)
 
 
 count = 0
