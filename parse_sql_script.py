@@ -3,9 +3,39 @@ import ast
 from io import StringIO
 import re
 import pandas as pd
+import numpy as np
 
 sql_file = "/home/motaz/Downloads/wiki/arzwiki-20170120-langlinks.sql"
 #sql_file = "/home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql"
+
+
+def read_sql_dump(dump_filename, target_table):
+    records = list()
+    fast_forward = True
+    with open(dump_filename, 'r', encoding='utf-8', errors='replace') as f:
+        for line in f:
+            line = line.strip()
+            if line.lower().startswith('insert') and target_table in line:
+                fast_forward = False
+            if fast_forward:
+                continue
+            data = line.split('),')
+            print(data)
+            for d in data:
+                try:
+                    print(d)
+                    #newline = d.strip(' ()')
+                    #newline = newline.replace('`', '')
+                    #print(newline.split(','))
+                    #print(len(newline.strip().split(',')))
+                    #row = newline.strip().split(',')
+                    records.append([d[0], d[1], d[3]])
+                except IndexError:
+                    pass
+            if line.endswith(';'):
+                break
+    #sio.seek(0)
+    return records
 
 
 def read_dump(dump_filename, target_table):
@@ -20,14 +50,16 @@ def read_dump(dump_filename, target_table):
             if fast_forward:
                 continue
             data = re.findall('\([^\)]*\)', line)
-            #print(data)
+            print(data)
             for d in data:
                 try:
-                    newline = d.strip(' ()')
-                    newline = newline.replace('`', '')
+                    print(d)
+                    #newline = d.strip(' ()')
+                    #newline = newline.replace('`', '')
                     #print(newline.split(','))
                     #print(len(newline.strip().split(',')))
-                    records.append(newline.strip().split(','))
+                    #row = newline.strip().split(',')
+                    records.append([d[0], d[1], d[3]])
                 except IndexError:
                     pass
             if line.endswith(';'):
@@ -38,10 +70,10 @@ def read_dump(dump_filename, target_table):
 
 
 
-data = read_dump(dump_filename=sql_file, target_table='langlinks')
+data = read_sql_dump(dump_filename=sql_file, target_table='langlinks')
 #print(arz_langlinks_csv.readlines())
-df_arz_langlinks = pd.DataFrame(data)
-print(df_arz_langlinks)
+#df_arz_langlinks = pd.DataFrame(data=data, columns=['ll_from', 'll_lang', 'll_title'])
+#print(df_arz_langlinks)
 
 
 
