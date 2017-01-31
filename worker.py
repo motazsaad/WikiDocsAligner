@@ -24,30 +24,18 @@ def write_file(f, doc):
         file_writer.close()
 
 
-def save_docs(aligned_docs, out_dir, src_lang, target_lang):
-    src_path = os.path.join(out_dir, src_lang)
-    target_path = os.path.join(out_dir, target_lang)
-    if not os.path.exists(src_path): os.makedirs(src_path)
-    if not os.path.exists(target_path): os.makedirs(target_path)
-    file_count = 0
-    for s, t in aligned_docs:
-        file_name = "doc_{:06d}.txt".format(file_count)
-        src_out = os.path.join(out_dir, file_name)
-        target_out = os.path.join(out_dir, file_name)
-        write_file(src_out, s)
-        write_file(target_out, t)
-        sys.stdout.write("\rdocuments aligned: {0}".format(file_count))
-        sys.stdout.flush()
-        file_count += 1
-    print("\ndone!")
+def save_docs(src_doc, target_doc, out_dir, file_count):
+    file_name = "doc_{:06d}.txt".format(file_count)
+    src_out = os.path.join(out_dir, file_name)
+    target_out = os.path.join(out_dir, file_name)
+    write_file(src_out, src_doc)
+    write_file(target_out, target_doc)
 
 
 
-
-def doJob(src_lang, target_lang, src_df, target_df, src_corpus, target_corpus, out_dir):
+def doJob(src_lang, target_lang, src_df, src_corpus, target_corpus, out_dir):
     print("aligning documents ...")
     print("source corpus size: {0} documents".format(len(src_corpus)))
-    aligned_docs = list()
     aligned_count = 0
     processed_count = 0
     for src_doc in src_corpus:
@@ -55,10 +43,9 @@ def doJob(src_lang, target_lang, src_df, target_df, src_corpus, target_corpus, o
         target_title = getTargetTitle(src_df, doc_id, target_lang)
         if target_title:
             target_doc = getDocByTitle(target_title, target_corpus)
-            aligned_docs.append((src_doc, target_doc))
+            save_docs(src_doc, target_doc, out_dir, aligned_count)
             aligned_count += 1
         sys.stdout.write("\rdocuments processed: {0}\t\tdocuments aligned: {1}".format(processed_count, aligned_count))
         sys.stdout.flush()
         processed_count += 1
-    save_docs(aligned_docs, out_dir, src_lang, target_lang)
     print("writing aligned documents completed successfully!")
