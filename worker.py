@@ -56,7 +56,7 @@ def doJob(src_lang, target_lang, src_df, target_df, src_corpus, target_corpus, o
         if target_title:
             target_doc = getDocByTitle(target_title, target_corpus)
             aligned_docs.append((src_doc, target_doc))
-            file_count += 1
+            aligned_count += 1
         sys.stdout.write("\rdocuments processed: {0}\t\tdocuments aligned: {1}".format(processed_count, aligned_count))
         sys.stdout.flush()
         processed_count += 1
