@@ -22,7 +22,7 @@ def getDocByTitle(title, corpus):
 def write_file(f, doc):
     doc_id, title, d = doc
     with open(f, 'w') as file_writer:
-        file_writer.write(d.get_text())
+        file_writer.write(d.doc)
         file_writer.close()
 
 
