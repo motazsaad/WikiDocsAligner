@@ -27,43 +27,4 @@ where arz_langlinks.ll_lang = 'ar' and arz_langlinks.ll_title = 'ماء'
 
 
 
-#wiki_file = "/home/motaz/Downloads/wiki/arwiki/AA/wiki_00"
-
-
-def load_corpus(corpus_dir):
-    corpus = list()
-    for subdir, dirs, files in os.walk(corpus_dir):
-        for f in files:
-            wiki_file = os.path.join(subdir, f)
-            with open(wiki_file, encoding='utf-8') as wiki_reader:
-                text = wiki_reader.read()
-                soup = BeautifulSoup(text, 'html.parser')
-                docs = soup.find_all('doc')
-                for doc in docs:
-                    doc_id = doc.get('id')
-                    title = doc.get('title')
-                    corpus.append((doc_id, title, doc))
-    return corpus
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-if __name__ == '__main__':
-    src_corpus_dir = '/home/motaz/Downloads/wiki/arzwiki/'
-    target_corpus_dir = '/home/motaz/Downloads/wiki/arwiki/'
-
-    src_corpus = load_corpus(src_corpus_dir)
-    target_corpus = load_corpus(target_corpus_dir)
 

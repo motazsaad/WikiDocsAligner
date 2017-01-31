@@ -1,7 +1,6 @@
 import sys
 import parse_sql_script
 import os
-import read_wiki_extracts
 import worker
 
 

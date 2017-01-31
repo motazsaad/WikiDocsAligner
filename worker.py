@@ -22,7 +22,7 @@ def getDocByTitle(title, corpus):
 def write_file(f, doc):
     doc_id, title, d = doc
     with open(f, 'w') as file_writer:
-        file_writer.write(d.doc)
+        file_writer.write(str(d))
         file_writer.close()
 
 
@@ -39,7 +39,6 @@ def save_docs(src_doc, target_doc, src_lang, target_lang, out_dir, file_count):
 def doJob(src_lang, target_lang, src_df, src_corpus, target_corpus, out_dir):
     print("aligning documents ...")
     print("source corpus size: {0} documents".format(len(src_corpus)))
-    #print("sample:\n", src_corpus[0])
     aligned_count = 0
     processed_count = 0
     for src_doc in src_corpus:
@@ -47,12 +46,13 @@ def doJob(src_lang, target_lang, src_df, src_corpus, target_corpus, out_dir):
         target_title = getTargetTitle(src_df, doc_id, target_lang)
         if target_title:
             target_doc = getDocByTitle(target_title, target_corpus)
-            save_docs(src_doc, target_doc, src_lang, target_lang, out_dir, aligned_count)
-            aligned_count += 1
+            if target_doc:
+                save_docs(src_doc, target_doc, src_lang, target_lang, out_dir, aligned_count)
+                aligned_count += 1
         sys.stdout.write("\rdocuments processed: {0}\t\tdocuments aligned: {1}".format(processed_count, aligned_count))
         sys.stdout.flush()
         processed_count += 1
-    print("writing aligned documents completed successfully!")
+    print("\nwriting aligned documents completed successfully!")
 
 
 def load_corpus(corpus_dir):
