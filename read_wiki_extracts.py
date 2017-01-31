@@ -46,16 +46,9 @@ def load_corpus(corpus_dir):
     return corpus
 
 
-def getTargetTitle(df, doc_id, ll_lang):
-    return df.loc[(df.ll_from == doc_id) & (df.ll_lang == ll_lang), 'll_title'].values[0]
 
 
 
-def align_corpus(src_corpus, target_corpus):
-    arz_df, ar_df = parse_sql_script.load_df()
-    for wiki_doc in src_corpus:
-        doc_id, title, doc = wiki_doc
-        target_title = getTargetTitle(ar_df, doc_id, 'arz')
 
 
 

@@ -16,6 +16,7 @@ def main(src_lang, target_lang, src_ll_sql, src_corpus_dir, target_corpus_dir, o
 
     src_df = parse_sql_script.sql2df(src_ll_sql)
     print("inter-language links sql file loaded successfully")
+
     src_corpus = read_wiki_extracts.load_corpus(src_corpus_dir)
     target_corpus = read_wiki_extracts.load_corpus(target_corpus_dir)
     print("source and target corpus loaded successfully")
