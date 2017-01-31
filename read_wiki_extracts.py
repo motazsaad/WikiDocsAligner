@@ -37,7 +37,7 @@ def load_corpus(corpus_dir):
             wiki_file = os.path.join(subdir, f)
             with open(wiki_file, encoding='utf-8') as wiki_reader:
                 text = wiki_reader.read()
-                soup = BeautifulSoup(wiki_file, 'html.parser')
+                soup = BeautifulSoup(text, 'html.parser')
                 docs = soup.find_all('doc')
                 for doc in docs:
                     doc_id = doc.get('id')

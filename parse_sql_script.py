@@ -36,7 +36,7 @@ def read_sql_dump(dump_filename):
 
 def sql2df(dump_filename):
     csv = read_sql_dump(dump_filename)
-    df = pd.read_csv(csv, delimiter='\t', error_bad_lines=False)
+    df = pd.read_csv(csv, delimiter='\t', error_bad_lines=False, warn_bad_lines=False)
     return df
 
 
