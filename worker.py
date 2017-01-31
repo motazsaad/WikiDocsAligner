@@ -20,18 +20,20 @@ def getDocByTitle(title, corpus):
 
 
 def write_file(f, doc):
+    doc_id, title, d = doc
     with open(f, 'w') as file_writer:
-        file_writer.write(doc.get_text())
+        file_writer.write(d.get_text())
         file_writer.close()
 
 
-def save_docs(src_doc, target_doc, out_dir, file_count):
+def save_docs(src_doc, target_doc, src_lang, target_lang, out_dir, file_count):
+    src_path = os.path.join(out_dir, src_lang)
+    target_path = os.path.join(out_dir, target_lang)
     file_name = "doc_{:06d}.txt".format(file_count)
-    src_out = os.path.join(out_dir, file_name)
-    target_out = os.path.join(out_dir, file_name)
+    src_out = os.path.join(src_path, file_name)
+    target_out = os.path.join(target_path, file_name)
     write_file(src_out, src_doc)
     write_file(target_out, target_doc)
-
 
 
 def doJob(src_lang, target_lang, src_df, src_corpus, target_corpus, out_dir):
@@ -45,7 +47,7 @@ def doJob(src_lang, target_lang, src_df, src_corpus, target_corpus, out_dir):
         target_title = getTargetTitle(src_df, doc_id, target_lang)
         if target_title:
             target_doc = getDocByTitle(target_title, target_corpus)
-            save_docs(src_doc, target_doc, out_dir, aligned_count)
+            save_docs(src_doc, target_doc, src_lang, target_lang, out_dir, aligned_count)
             aligned_count += 1
         sys.stdout.write("\rdocuments processed: {0}\t\tdocuments aligned: {1}".format(processed_count, aligned_count))
         sys.stdout.flush()
