@@ -43,10 +43,11 @@ def load_corpus(corpus_dir):
                     doc_id = doc.get('id')
                     title = doc.get('title')
                     corpus.append((doc_id, title, doc))
+    return corpus
 
 
-def ge_title(df, doc_id, ll_lang):
-    return df.loc[df['id'] == doc_id, 'll_lang'].values[0]
+def getTargetTitle(df, doc_id, ll_lang):
+    return df.loc[(df.ll_from == doc_id) & (df.ll_lang == ll_lang), 'll_title'].values[0]
 
 
 
@@ -54,6 +55,8 @@ def align_corpus(src_corpus, target_corpus):
     arz_df, ar_df = parse_sql_script.load_df()
     for wiki_doc in src_corpus:
         doc_id, title, doc = wiki_doc
+        target_title = getTargetTitle(ar_df, doc_id, 'arz')
+
 
 
 
