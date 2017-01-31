@@ -34,6 +34,20 @@ def read_sql_dump(dump_filename):
     return sio
 
 
+def load_df():
+    arz_sql_file = "/home/motaz/Downloads/wiki/arzwiki-20170120-langlinks.sql"  # mariadb records = 1015028
+    ar_sql_file = "/home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql"  # mariadb records = 8693372
+
+    arz_csv = read_sql_dump(dump_filename=arz_sql_file)
+    arz_df = pd.read_csv(arz_csv, delimiter='\t', error_bad_lines=False)
+    arz_selected = arz_df[arz_df.ll_lang == 'ar']
+
+    ar_csv = read_sql_dump(dump_filename=ar_sql_file)
+    ar_df = pd.read_csv(ar_csv, delimiter='\t', error_bad_lines=False)
+    ar_selected = ar_df[ar_df.ll_lang == 'arz']
+
+    return arz_selected, ar_selected
+
 if __name__ == '__main__':
     arz_sql_file = "/home/motaz/Downloads/wiki/arzwiki-20170120-langlinks.sql"  # mariadb records = 1015028
     ar_sql_file = "/home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql"  # mariadb records = 8693372
