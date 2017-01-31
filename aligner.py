@@ -39,5 +39,6 @@ if __name__ == '__main__':
 '''
 python3 aligner.py arz ar /home/motaz/Downloads/wiki/arzwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arzwiki /home/motaz/Downloads/wiki/arwiki /home/motaz/tmp/out/
 
+python3 aligner.py ar arz /home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arzwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arwiki /home/motaz/Downloads/wiki/arzwiki /home/motaz/tmp/out/
 
 '''

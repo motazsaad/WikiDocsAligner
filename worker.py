@@ -48,16 +48,17 @@ def doJob(src_lang, target_lang, src_df, target_df, src_corpus, target_corpus, o
     print("aligning documents ...")
     print("source corpus size: {0} documents".format(len(src_corpus)))
     aligned_docs = list()
-    file_count = 0
+    aligned_count = 0
+    processed_count = 0
     for src_doc in src_corpus:
         doc_id, title, doc = src_doc
         target_title = getTargetTitle(src_df, doc_id, target_lang)
         if target_title:
             target_doc = getDocByTitle(target_title, target_corpus)
             aligned_docs.append((src_doc, target_doc))
-            sys.stdout.write("\rdocuments aligned: {0}".format(file_count))
-            sys.stdout.flush()
             file_count += 1
-
+        sys.stdout.write("\rdocuments processed: {0}\t\tdocuments aligned: {1}".format(processed_count, aligned_count))
+        sys.stdout.flush()
+        processed_count += 1
     save_docs(aligned_docs, out_dir, src_lang, target_lang)
     print("writing aligned documents completed successfully!")
