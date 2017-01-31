@@ -4,13 +4,10 @@ from bs4 import BeautifulSoup
 
 
 def getTargetTitle(df, doc_id, ll_lang):
-    print('searching for ', doc_id, ll_lang)
     try:
         title = df.loc[(df.ll_from == doc_id) & (df.ll_lang == ll_lang), 'll_title'].values[0]
-        print("title:", title)
         return title
     except IndexError as error:
-        print("title not found")
         return None
 
 
@@ -24,7 +21,7 @@ def getDocByTitle(title, corpus):
 
 def write_file(f, doc):
     with open(f, 'w') as file_writer:
-        file_writer.write(doc)
+        file_writer.write(doc.get_text())
         file_writer.close()
 
 
@@ -40,6 +37,7 @@ def save_docs(src_doc, target_doc, out_dir, file_count):
 def doJob(src_lang, target_lang, src_df, src_corpus, target_corpus, out_dir):
     print("aligning documents ...")
     print("source corpus size: {0} documents".format(len(src_corpus)))
+    #print("sample:\n", src_corpus[0])
     aligned_count = 0
     processed_count = 0
     for src_doc in src_corpus:

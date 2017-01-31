@@ -15,7 +15,7 @@ def main(src_lang, target_lang, src_ll_sql, src_corpus_dir, target_corpus_dir, o
     if not os.path.exists(target_path): os.makedirs(target_path)
 
     src_df = parse_sql_script.sql2df(src_ll_sql, target_lang)
-    print(src_df)
+    #print(src_df)
     print("inter-language links sql file loaded successfully")
 
     src_corpus = worker.load_corpus(src_corpus_dir)
