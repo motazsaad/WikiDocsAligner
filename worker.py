@@ -5,8 +5,10 @@ import sys
 def getTargetTitle(df, doc_id, ll_lang):
     try:
         title = df.loc[(df.ll_from == doc_id) & (df.ll_lang == ll_lang), 'll_title'].values[0]
+        print("title:", title)
         return title
     except IndexError as error:
+        print("title not found")
         return None
 
 
