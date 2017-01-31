@@ -1,8 +1,10 @@
 import os
 import sys
+from bs4 import BeautifulSoup
 
 
 def getTargetTitle(df, doc_id, ll_lang):
+    print('searching for ', doc_id, ll_lang)
     try:
         title = df.loc[(df.ll_from == doc_id) & (df.ll_lang == ll_lang), 'll_title'].values[0]
         print("title:", title)
@@ -51,3 +53,19 @@ def doJob(src_lang, target_lang, src_df, src_corpus, target_corpus, out_dir):
         sys.stdout.flush()
         processed_count += 1
     print("writing aligned documents completed successfully!")
+
+
+def load_corpus(corpus_dir):
+    corpus = list()
+    for subdir, dirs, files in os.walk(corpus_dir):
+        for f in files:
+            wiki_file = os.path.join(subdir, f)
+            with open(wiki_file, encoding='utf-8') as wiki_reader:
+                text = wiki_reader.read()
+                soup = BeautifulSoup(text, 'html.parser')
+                docs = soup.find_all('doc')
+                for doc in docs:
+                    doc_id = doc.get('id')
+                    title = doc.get('title')
+                    corpus.append((doc_id, title, doc))
+    return corpus

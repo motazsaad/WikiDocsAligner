@@ -34,9 +34,10 @@ def read_sql_dump(dump_filename):
     return sio
 
 
-def sql2df(dump_filename):
+def sql2df(dump_filename, target_lang):
     csv = read_sql_dump(dump_filename)
     df = pd.read_csv(csv, delimiter='\t', error_bad_lines=False, warn_bad_lines=False)
+    selected_df = df[df.ll_lang == target_lang]
     return df
 
 
