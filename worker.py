@@ -3,7 +3,11 @@ import sys
 
 
 def getTargetTitle(df, doc_id, ll_lang):
-    return df.loc[(df.ll_from == doc_id) & (df.ll_lang == ll_lang), 'll_title'].values[0]
+    try:
+        title = df.loc[(df.ll_from == doc_id) & (df.ll_lang == ll_lang), 'll_title'].values[0]
+        return title
+    except IndexError as error:
+        return None
 
 
 def getDocByTitle(title, corpus):
@@ -46,8 +50,9 @@ def doJob(src_lang, target_lang, src_df, target_df, src_corpus, target_corpus, o
     for src_doc in src_corpus:
         doc_id, title, doc = src_doc
         target_title = getTargetTitle(src_df, doc_id, target_lang)
-        target_doc = getDocByTitle(target_title, target_corpus)
-        aligned_docs.append((src_doc, target_doc))
+        if target_title:
+            target_doc = getDocByTitle(target_title, target_corpus)
+            aligned_docs.append((src_doc, target_doc))
 
     save_docs(aligned_docs, out_dir, src_lang, target_lang)
     print("writing aligned documents completed successfully!")
