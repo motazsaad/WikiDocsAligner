@@ -3,8 +3,31 @@ import os
 import parse_sql_script
 
 
-#wiki_file = "/home/motaz/Downloads/wiki/arwiki/AA/wiki_00"
 
+'''
+arz:
+SELECT * FROM ar_langlinks
+where ar_langlinks.ll_lang = 'arz' and ar_langlinks.ll_title = 'ميه'
+;
+
+'7', 'arz', 'ميه'
+
+
+ar:
+SELECT * FROM arz_langlinks
+where arz_langlinks.ll_lang = 'ar' and arz_langlinks.ll_title = 'ماء'
+;
+'35097', 'ar', 'ماء'
+
+
+
+
+
+'''
+
+
+
+#wiki_file = "/home/motaz/Downloads/wiki/arwiki/AA/wiki_00"
 
 
 def load_corpus(corpus_dir):
@@ -22,10 +45,16 @@ def load_corpus(corpus_dir):
                     corpus.append((doc_id, title, doc))
 
 
+def ge_title(df, doc_id, ll_lang):
+    return df.loc[df['id'] == doc_id, 'll_lang'].values[0]
+
+
+
 def align_corpus(src_corpus, target_corpus):
     arz_df, ar_df = parse_sql_script.load_df()
     for wiki_doc in src_corpus:
         doc_id, title, doc = wiki_doc
+
 
 
 

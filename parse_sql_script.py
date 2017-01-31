@@ -56,12 +56,13 @@ if __name__ == '__main__':
     arz_df = pd.read_csv(arz_csv, delimiter='\t', error_bad_lines=False)
     #print(arz_df)
     arz_selected = arz_df[arz_df.ll_lang == 'ar']
+    print(arz_selected)
 
-    ar_csv = read_sql_dump(dump_filename=ar_sql_file)
-    ar_df = pd.read_csv(ar_csv, delimiter='\t', error_bad_lines=False)
-    #print(ar_df)
-    ar_selected = ar_df[ar_df.ll_lang == 'arz']
-    print(ar_selected)
+    # ar_csv = read_sql_dump(dump_filename=ar_sql_file)
+    # ar_df = pd.read_csv(ar_csv, delimiter='\t', error_bad_lines=False)
+    # #print(ar_df)
+    # ar_selected = ar_df[ar_df.ll_lang == 'arz']
+    # print(ar_selected)
 
 
 
