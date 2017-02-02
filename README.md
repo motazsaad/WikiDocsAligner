@@ -1,2 +1,2 @@
 # WikiArticlesAligner
-Align Wikipedia articles based on interlang links 
+Align Wikipedia articles based on interlanguage links 
