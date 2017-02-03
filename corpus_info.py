@@ -4,12 +4,21 @@ import worker
 import operator
 from tabulate import tabulate
 from bs4 import BeautifulSoup
-
+import string
 
 
 def remove_punctuations(text):
     punctuations = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~،'
     return ''.join(ch for ch in text if ch not in punctuations)
+
+
+#table = string.maketrans("","")
+#s.translate(table, string.punctuation)
+
+def remove_punct(s):
+    translator = str.maketrans('', '', string.punctuation + "،")
+    return  s.translate(translator)
+
 
 def info(corpus_file, topn=30):
     print("reading corpus ...")
@@ -18,11 +27,16 @@ def info(corpus_file, topn=30):
     soup = BeautifulSoup(corpus, 'html.parser')
     del corpus
     print("removing punctuations")
-    clean_corpus = remove_punctuations(soup.get_text())
+    clean_corpus = soup.get_text()
     del soup
-    print("get the words list")
-    words = clean_corpus.split()
+    clean_text = remove_punct(clean_corpus)
     del clean_corpus
+    print("get the words list")
+    words = clean_text.split()
+    del clean_text
+    stopwords = open("stopwords.ar").read().split()
+    print("removing stopwords")
+    words = [w for w in words if w not in stopwords]
     print("start to count frequencies")
     word_freq = {}
     for word in words:
