@@ -34,7 +34,7 @@ def info(corpus_file, topn=30):
     print("get the words list")
     words = clean_text.split()
     del clean_text
-    stopwords = open("stopwords.ar").read().split()
+    stopwords = open("stopwords_arabic.ar").read().split()
     print("removing stopwords")
     words = [w for w in words if w not in stopwords]
     print("start to count frequencies")
