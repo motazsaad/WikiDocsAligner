@@ -1,6 +1,13 @@
 # WikiDocsAligner: Wikipedia Documents Aligner 
 Align Wikipedia documents based on interlanguage links 
 
+
+## Installation
+
+To use this tool, you must install requirements 
+
+```pip install -r requirements.txt```
+
 ## Usage example:
 
 ### aligner.py

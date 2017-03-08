@@ -3,7 +3,6 @@ import ast
 from io import StringIO
 import re
 import pandas as pd
-import numpy as np
 import csv
 
 #''''ll_from', 'll_lang', 'll_title'\n'''
