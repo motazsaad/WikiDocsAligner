@@ -16,6 +16,8 @@ to get information about the corpus (the most frequent words)
 ```python corpus_info.py data/arz.wiki```
 
 
+## Related projects
+This project is used to extract [Comparable Documents from Wikipedia](https://github.com/motazsaad/comparableWikiCoprus/)
 
 
 #### To cite this tool:
