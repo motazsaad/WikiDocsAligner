@@ -12,12 +12,9 @@ def remove_punctuations(text):
     return ''.join(ch for ch in text if ch not in punctuations)
 
 
-#table = string.maketrans("","")
-#s.translate(table, string.punctuation)
-
-def remove_punct(s):
+def remove_punctuation(s):
     translator = str.maketrans('', '', string.punctuation + "،")
-    return  s.translate(translator)
+    return s.translate(translator)
 
 
 def info(corpus_file, topn=30):
@@ -29,7 +26,7 @@ def info(corpus_file, topn=30):
     print("removing punctuations")
     clean_corpus = soup.get_text()
     del soup
-    clean_text = remove_punct(clean_corpus)
+    clean_text = remove_punctuation(clean_corpus)
     del clean_corpus
     print("get the words list")
     words = clean_text.split()
@@ -44,49 +41,35 @@ def info(corpus_file, topn=30):
             word_freq[word] += 1
         else:
             word_freq[word] = 1
-    sortedFreq = sorted(word_freq.items(), key=operator.itemgetter(1), reverse=True)
+    sorted_freq = sorted(word_freq.items(), key=operator.itemgetter(1), reverse=True)
 
-    top = [list(i) for i in sortedFreq[:topn]]  # list of lists
+    top = [list(i) for i in sorted_freq[:topn]]  # list of lists
     return top
 
 
+def print_info_arabic(corpus):
+    top = info(corpus)
+    for item in top:
+        print("\RL{" + item[0] + "}\t\t&\t\t" + str(item[1]) + "\t\\\\") # for latex if the text is arabic
+
+
+def print_info(corpus):
+    top = info(corpus)
+    top_list = []
+    print(tabulate(top, headers=["Word", "Frequency"], tablefmt="pipe"))
+
+
+def usage():
+    return "please provide a corpus file"
 
 
 if __name__ == '__main__':
-    #arz = "/home/motaz/tmp/out/arz.wiki"
-    #ar = "/home/motaz/tmp/out/ar.wiki"
-
-    #arz_top = info(arz)
-    #ar_top = info(ar)
-
-    # for l1,l2 in zip(arz_top, ar_top):
-    #     print("\RL{" + l1[0] + "}\t\t&\t\t" + str(l1[1]) + "\t&\t\RL{" + l2[0] + "}\t\t&\t\t" + str(l2[1]) + "\t\\\\")
-
-    arz = "/home/motaz/Downloads/wiki/arz.wiki"
-    ar = "/home/motaz/Downloads/wiki/ar.wiki"
+    if len(sys.argv) == 2:
+        corpus = "/home/motaz/back09022017/wiki/arz.wiki"
+        print_info(corpus)
+    else:
+        print(usage())
+        sys.exit(-1)
 
 
-    # arz_top = info(arz)
-    # for l in arz_top:
-    #     print("\RL{" + l[0] + "}\t\t&\t\t" + str(l[1]) + "\t\\\\")
-
-    ar_top = info(ar)
-    for l in ar_top:
-        print("\RL{" + l[0] + "}\t\t&\t\t" + str(l[1]) + "\t\\\\")
-
-
-
-#table = [a+b for a,b in zip(arz_top,ar_top)]
-
-    #print(tabulate(top, headers=["Egyptian Word", "Frequency"], tablefmt="latex"))
-    #print(tabulate(table, headers=["Egyptian Word", "Frequency", "Arabic Word", "Frequency"], tablefmt="latex"))
-
-    # if len(sys.argv) < 2:
-    #     print("usage corpus_inf.py <corpus dir>")
-    # else:
-    #     corpus_dir = sys.argv[1]
-    #     info(corpus_dir)
-
-
-
-
+#python corpus_info.py /home/motaz/back09022017/wiki/arz.wiki
