@@ -7,6 +7,10 @@ import worker
 def main(src_lang, target_lang, src_ll_sql, src_corpus_dir, target_corpus_dir, out_dir):
     print('source language:', src_lang)
     print('target language:', target_lang)
+    print('source language links sql file', src_ll_sql)
+    print('source corpus directory', src_corpus_dir)
+    print('target corpus directory', target_corpus_dir)
+    print('output directory', out_dir)
 
     src_path = os.path.join(out_dir, src_lang)
     target_path = os.path.join(out_dir, target_lang)
@@ -24,7 +28,13 @@ def main(src_lang, target_lang, src_ll_sql, src_corpus_dir, target_corpus_dir, o
 
 
 def usage():
-    return "args should be: src_lang, target_lang, src_ll_sql, src_corpus_dir, target_corpus_dir, out_dir"
+    return '''args should be:
+    source language,
+    target target language,
+    source language links sql file,
+    source corpus directory,
+    target corpus directory,
+    output directory'''
 
 
 if __name__ == '__main__':
@@ -42,11 +52,7 @@ if __name__ == '__main__':
 
 
 '''
-python aligner.py arz ar /home/motaz/Downloads/wiki/arzwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arzwiki /home/motaz/Downloads/wiki/arwiki /home/motaz/tmp/out/
 
-python aligner.py ar arz /home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arzwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arwiki /home/motaz/Downloads/wiki/arzwiki /home/motaz/tmp/out/
-
-python aligner.py ar arz /home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arwiki /home/motaz/Downloads/wiki/arzwiki /home/motaz/tmp/out/
-
+python aligner.py ar arz /home/motaz/back09022017/wiki/arwiki-20170120-langlinks.sql /home/motaz/back09022017/wiki/arwiki /home/motaz/back09022017/wiki/arzwiki /home/motaz/tmp/out/
 
 '''
