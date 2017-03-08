@@ -3,13 +3,17 @@ Align Wikipedia documents based on interlanguage links
 
 ## Usage example:
 
+### aligner.py
+align wikipedia documents given that you have the sql of interlanugage links and document extracts 
+
+```python aligner.py arz ar arzwiki-20170120-langlinks.sql arwiki-20170120-langlinks.sql data/arzwiki data/arwiki out/```
 
 
 
 ### corpus_info.py
 to get information about the corpus (the most frequent words)
 
-```python corpus_info.py /home/motaz/back09022017/wiki/arz.wiki```
+```python corpus_info.py data/arz.wiki```
 
 
 
