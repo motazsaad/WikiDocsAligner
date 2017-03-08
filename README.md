@@ -1,4 +1,4 @@
-# WikiDocsAligner
+# WikiDocsAligner: Wikipedia Documents Aligner 
 Align Wikipedia documents based on interlanguage links 
 
 ## Usage example:

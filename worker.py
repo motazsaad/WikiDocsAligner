@@ -3,7 +3,7 @@ import sys
 from bs4 import BeautifulSoup
 
 
-def getTargetTitle(df, doc_id, ll_lang):
+def get_target_title(df, doc_id, ll_lang):
     try:
         title = df.loc[(df.ll_from == doc_id) & (df.ll_lang == ll_lang), 'll_title'].values[0]
         return title
@@ -11,7 +11,7 @@ def getTargetTitle(df, doc_id, ll_lang):
         return None
 
 
-def getDocByTitle(title, corpus):
+def get_doc_by_title(title, corpus):
     for wiki_doc in corpus:
         doc_id, doc_title, doc = wiki_doc
         if doc_title == title:
@@ -36,16 +36,16 @@ def save_docs(src_doc, target_doc, src_lang, target_lang, out_dir, file_count):
     write_file(target_out, target_doc)
 
 
-def doJob(src_lang, target_lang, src_df, src_corpus, target_corpus, out_dir):
+def do_work(src_lang, target_lang, src_df, src_corpus, target_corpus, out_dir):
     print("aligning documents ...")
     print("source corpus size: {0} documents".format(len(src_corpus)))
     aligned_count = 0
     processed_count = 0
     for src_doc in src_corpus:
         doc_id, title, doc = src_doc
-        target_title = getTargetTitle(src_df, doc_id, target_lang)
+        target_title = get_target_title(src_df, doc_id, target_lang)
         if target_title:
-            target_doc = getDocByTitle(target_title, target_corpus)
+            target_doc = get_doc_by_title(target_title, target_corpus)
             if target_doc:
                 save_docs(src_doc, target_doc, src_lang, target_lang, out_dir, aligned_count)
                 aligned_count += 1

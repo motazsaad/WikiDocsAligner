@@ -24,7 +24,6 @@ def read_sql_dump(dump_filename):
                 for d in data:
                     try:
                         record = d[1:]
-                        #print('\t'.join(record.replace('\'', '').split(',')))
                         sio.write('\t'.join(record.replace('\'', '').split(',')))
                         sio.write("\n")
                     except BaseException as error:
@@ -35,43 +34,12 @@ def read_sql_dump(dump_filename):
 
 
 def sql2df(dump_filename, target_lang):
-    csv = read_sql_dump(dump_filename)
-    df = pd.read_csv(csv, delimiter='\t', error_bad_lines=False, warn_bad_lines=False)
+    my_csv = read_sql_dump(dump_filename)
+    df = pd.read_csv(my_csv, delimiter='\t', error_bad_lines=False, warn_bad_lines=False)
     selected_df = df[df.ll_lang == target_lang]
     return selected_df
 
 
-
-
-def load_df():
-    arz_sql_file = "/home/motaz/Downloads/wiki/arzwiki-20170120-langlinks.sql"  # mariadb records = 1015028
-    ar_sql_file = "/home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql"  # mariadb records = 8693372
-
-    arz_csv = read_sql_dump(dump_filename=arz_sql_file)
-    arz_df = pd.read_csv(arz_csv, delimiter='\t', error_bad_lines=False)
-    arz_selected = arz_df[arz_df.ll_lang == 'ar']
-
-    ar_csv = read_sql_dump(dump_filename=ar_sql_file)
-    ar_df = pd.read_csv(ar_csv, delimiter='\t', error_bad_lines=False)
-    ar_selected = ar_df[ar_df.ll_lang == 'arz']
-
-    return arz_selected, ar_selected
-
-if __name__ == '__main__':
-    arz_sql_file = "/home/motaz/Downloads/wiki/arzwiki-20170120-langlinks.sql"  # mariadb records = 1015028
-    ar_sql_file = "/home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql"  # mariadb records = 8693372
-
-    arz_csv = read_sql_dump(dump_filename=arz_sql_file)
-    arz_df = pd.read_csv(arz_csv, delimiter='\t', error_bad_lines=False)
-    #print(arz_df)
-    arz_selected = arz_df[arz_df.ll_lang == 'ar']
-    print(arz_selected)
-
-    # ar_csv = read_sql_dump(dump_filename=ar_sql_file)
-    # ar_df = pd.read_csv(ar_csv, delimiter='\t', error_bad_lines=False)
-    # #print(ar_df)
-    # ar_selected = ar_df[ar_df.ll_lang == 'arz']
-    # print(ar_selected)
 
 
 

@@ -14,13 +14,13 @@ def main(src_lang, target_lang, src_ll_sql, src_corpus_dir, target_corpus_dir, o
     if not os.path.exists(target_path): os.makedirs(target_path)
 
     src_df = parse_sql_script.sql2df(src_ll_sql, target_lang)
-    #print(src_df)
+
     print("inter-language links sql file loaded successfully")
 
     src_corpus = worker.load_corpus(src_corpus_dir)
     target_corpus = worker.load_corpus(target_corpus_dir)
     print("source and target corpus loaded successfully")
-    worker.doJob(src_lang, target_lang, src_df, src_corpus, target_corpus, out_dir)
+    worker.do_work(src_lang, target_lang, src_df, src_corpus, target_corpus, out_dir)
 
 
 def usage():
@@ -42,11 +42,11 @@ if __name__ == '__main__':
 
 
 '''
-python3 aligner.py arz ar /home/motaz/Downloads/wiki/arzwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arzwiki /home/motaz/Downloads/wiki/arwiki /home/motaz/tmp/out/
+python aligner.py arz ar /home/motaz/Downloads/wiki/arzwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arzwiki /home/motaz/Downloads/wiki/arwiki /home/motaz/tmp/out/
 
-python3 aligner.py ar arz /home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arzwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arwiki /home/motaz/Downloads/wiki/arzwiki /home/motaz/tmp/out/
+python aligner.py ar arz /home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arzwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arwiki /home/motaz/Downloads/wiki/arzwiki /home/motaz/tmp/out/
 
-python3 aligner.py ar arz /home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arwiki /home/motaz/Downloads/wiki/arzwiki /home/motaz/tmp/out/
+python aligner.py ar arz /home/motaz/Downloads/wiki/arwiki-20170120-langlinks.sql /home/motaz/Downloads/wiki/arwiki /home/motaz/Downloads/wiki/arzwiki /home/motaz/tmp/out/
 
 
 '''
