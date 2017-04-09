@@ -41,12 +41,12 @@ def usage():
 parser = argparse.ArgumentParser(description='Align Wikipedia documents based on interlanguage links .')
 
 parser.add_argument('--srcLang', type=str, help='source language. '
-                                                'For example, ar for Arabic, or'
-                                                'en for English, or'
+                                                'e.g., ar for Arabic, '
+                                                'en for English, or '
                                                 'fr for French ...', required=True)
-parser.add_argument('--targetLang', type=str, help='source language. '
-                                                   'For example, ar for Arabic, or'
-                                                   'en for English, or'
+parser.add_argument('--targetLang', type=str, help='target language. '
+                                                   'e.g., ar for Arabic, '
+                                                   'en for English, or '
                                                    'fr for French ...', required=True)
 parser.add_argument('--sqlFile', type=str, help='source language links sql file. '
                                                 'Obtained from https://dumps.wikimedia.org/', required=True)

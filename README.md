@@ -25,15 +25,19 @@ Align Wikipedia documents based on interlanguage links .
 
 optional arguments:
   -h, --help            show this help message and exit
-  --srcLang SRCLANG     source language.
+  --srcLang SRCLANG     source language. e.g., ar for Arabic, en for English,
+                        or fr for French ...
   --targetLang TARGETLANG
-                        target language.
-  --sqlFile SQLFILE     source language links sql file.
+                        target language. e.g., ar for Arabic, en for English,
+                        or fr for French ...
+  --sqlFile SQLFILE     source language links sql file. Obtained from
+                        https://dumps.wikimedia.org/
   --srcCorpus SRCCORPUS
                         source corpus directory.
   --targetCorpus TARGETCORPUS
                         target corpus directory.
   --outDir OUTDIR       the output directory.
+
 
 ```
 
