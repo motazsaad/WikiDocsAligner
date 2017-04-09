@@ -1,3 +1,4 @@
+import argparse
 import sys
 import parse_sql_script
 import os
@@ -30,25 +31,30 @@ def main(src_lang, target_lang, src_ll_sql, src_corpus_dir, target_corpus_dir, o
 def usage():
     return '''args should be:
     source language,
-    target target language,
+    target language,
     source language links sql file,
     source corpus directory,
     target corpus directory,
     output directory'''
 
+parser = argparse.ArgumentParser(description='Align Wikipedia documents based on interlanguage links .')
+
+parser.add_argument('--srcLang', type=str, help='source language.', required=True)
+parser.add_argument('--targetLang', type=str, help='target language.', required=True)
+parser.add_argument('--sqlFile', type=str, help='source language links sql file.', required=True)
+parser.add_argument('--srcCorpus', type=str, help='source corpus directory.', required=True)
+parser.add_argument('--targetCorpus', type=str, help='target corpus directory.', required=True)
+parser.add_argument('--outDir', type=str, help='the output directory.', required=True)
 
 if __name__ == '__main__':
-    if len(sys.argv) < 7:
-        print(usage())
-        sys.exit(0)
-    else:
-        src_lang = sys.argv[1]
-        target_lang = sys.argv[2]
-        src_ll_sql = sys.argv[3]
-        src_corpus_dir = sys.argv[4]
-        target_corpus_dir = sys.argv[5]
-        out_dir = sys.argv[6]
-        main(src_lang, target_lang, src_ll_sql, src_corpus_dir, target_corpus_dir, out_dir)
+    args = parser.parse_args()
+    src_lang = args.srcLang
+    target_lang = args.targetLang
+    src_ll_sql = args.sqlFile
+    src_corpus_dir = args.srcCorpus
+    target_corpus_dir = args.targetCorpus
+    out_dir = args.outDir
+    main(src_lang, target_lang, src_ll_sql, src_corpus_dir, target_corpus_dir, out_dir)
 
 
 '''

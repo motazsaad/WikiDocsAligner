@@ -15,7 +15,27 @@ align wikipedia documents given that you have the sql of interlanugage links and
 
 ```python aligner.py ar arz data/arwiki-20170120-langlinks.sql data/wiki/arwiki data/wiki/arzwiki data/out/```
 
+### Arguments
+```
+usage: aligner.py [-h] --srcLang SRCLANG --targetLang TARGETLANG --sqlFile
+                  SQLFILE --srcCorpus SRCCORPUS --targetCorpus TARGETCORPUS
+                  --outDir OUTDIR
 
+Align Wikipedia documents based on interlanguage links .
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --srcLang SRCLANG     source language.
+  --targetLang TARGETLANG
+                        target language.
+  --sqlFile SQLFILE     source language links sql file.
+  --srcCorpus SRCCORPUS
+                        source corpus directory.
+  --targetCorpus TARGETCORPUS
+                        target corpus directory.
+  --outDir OUTDIR       the output directory.
+
+```
 
 ### corpus_info.py
 to get information about the corpus (the most frequent words)
@@ -29,5 +49,14 @@ This project is used to extract [Comparable Documents from Wikipedia](https://gi
 
 #### To cite this tool:
 
-Motaz Saad (2017). _WikiDocsAligner: an off-the-shelf Wikipedia Documents Alignment Tool_. in The Second Palestinian International Conference on Information and
+Motaz Saad and Basem Alijla (2017). _WikiDocsAligner: an off-the-shelf Wikipedia Documents Alignment Tool_. in The Second Palestinian International Conference on Information and
 Communication Technology (PICICT 2017). 
+
+
+## How to contribute
+Your contributions to improve the code are welcomed. Please follow the steps below.
+1. Fork the project.
+2. Modify the code, test it, make sure that it works fine. 
+3. Make a pull request.
+
+Please consult [github help](https://help.github.com/) to get help.
