@@ -37,11 +37,19 @@ def usage():
     target corpus directory,
     output directory'''
 
+
 parser = argparse.ArgumentParser(description='Align Wikipedia documents based on interlanguage links .')
 
-parser.add_argument('--srcLang', type=str, help='source language.', required=True)
-parser.add_argument('--targetLang', type=str, help='target language.', required=True)
-parser.add_argument('--sqlFile', type=str, help='source language links sql file.', required=True)
+parser.add_argument('--srcLang', type=str, help='source language. '
+                                                'For example, ar for Arabic, or'
+                                                'en for English, or'
+                                                'fr for French ...', required=True)
+parser.add_argument('--targetLang', type=str, help='source language. '
+                                                   'For example, ar for Arabic, or'
+                                                   'en for English, or'
+                                                   'fr for French ...', required=True)
+parser.add_argument('--sqlFile', type=str, help='source language links sql file. '
+                                                'Obtained from https://dumps.wikimedia.org/', required=True)
 parser.add_argument('--srcCorpus', type=str, help='source corpus directory.', required=True)
 parser.add_argument('--targetCorpus', type=str, help='target corpus directory.', required=True)
 parser.add_argument('--outDir', type=str, help='the output directory.', required=True)
@@ -55,7 +63,6 @@ if __name__ == '__main__':
     target_corpus_dir = args.targetCorpus
     out_dir = args.outDir
     main(src_lang, target_lang, src_ll_sql, src_corpus_dir, target_corpus_dir, out_dir)
-
 
 '''
 
