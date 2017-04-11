@@ -13,7 +13,7 @@ To use this tool, you must install requirements
 ### aligner.py
 align wikipedia documents given that you have the sql of interlanugage links and document extracts 
 
-```python aligner.py ar arz data/arwiki-20170120-langlinks.sql data/wiki/arwiki data/wiki/arzwiki data/out/```
+```python aligner.py --srcLang ar --targetLang arz --sqlFile data/arwiki-20170120-langlinks.sql --srcCorpus data/wiki/arwiki --targetCorpus data/wiki/arzwiki --outDir data/out/```
 
 ### Arguments
 ```
