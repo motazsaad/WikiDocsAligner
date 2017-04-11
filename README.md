@@ -53,8 +53,7 @@ This project is used to extract [Comparable Documents from Wikipedia](https://gi
 
 #### To cite this tool:
 
-Motaz Saad and Basem Alijla (2017). _WikiDocsAligner: an off-the-shelf Wikipedia Documents Alignment Tool_. in The Second Palestinian International Conference on Information and
-Communication Technology (PICICT 2017). 
+Motaz Saad and Basem Alijla (2017). _WikiDocsAligner: an off-the-shelf Wikipedia Documents Alignment Tool_. in The Second Palestinian International Conference on Information and Communication Technology (PICICT 2017). 
 
 
 ## How to contribute
