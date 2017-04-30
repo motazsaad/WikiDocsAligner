@@ -13,30 +13,31 @@ To use this tool, you must install requirements
 ### aligner.py
 align wikipedia documents given that you have the sql of interlanugage links and document extracts 
 
-```python aligner.py --srcLang ar --targetLang arz --sqlFile data/arwiki-20170120-langlinks.sql --srcCorpus data/wiki/arwiki --targetCorpus data/wiki/arzwiki --outDir data/out/```
+```python aligner.py --src-lang ar --target-lang arz --sql-file data/arwiki-20170120-langlinks.sql --src-corpus data/wiki/arwiki --target-corpus data/wiki/arzwiki --out-dir data/out/```
 
 ### Arguments
 ```
-usage: aligner.py [-h] --srcLang SRCLANG --targetLang TARGETLANG --sqlFile
-                  SQLFILE --srcCorpus SRCCORPUS --targetCorpus TARGETCORPUS
-                  --outDir OUTDIR
+usage: aligner.py [-h] --src-lang SRC_LANG --target-lang TARGET_LANG
+                  --sql-file SQL_FILE --src-corpus SRC_CORPUS --target-corpus
+                  TARGET_CORPUS --out-dir OUT_DIR
 
 Align Wikipedia documents based on interlanguage links .
 
 optional arguments:
   -h, --help            show this help message and exit
-  --srcLang SRCLANG     source language. e.g., ar for Arabic, en for English,
+  --src-lang SRC_LANG   source language. e.g., ar for Arabic, en for English,
                         or fr for French ...
-  --targetLang TARGETLANG
+  --target-lang TARGET_LANG
                         target language. e.g., ar for Arabic, en for English,
                         or fr for French ...
-  --sqlFile SQLFILE     source language links sql file. Obtained from
+  --sql-file SQL_FILE   source language links sql file. Obtained from
                         https://dumps.wikimedia.org/
-  --srcCorpus SRCCORPUS
+  --src-corpus SRC_CORPUS
                         source corpus directory.
-  --targetCorpus TARGETCORPUS
+  --target-corpus TARGET_CORPUS
                         target corpus directory.
-  --outDir OUTDIR       the output directory.
+  --out-dir OUT_DIR     the output directory.
+
 
 
 ```
