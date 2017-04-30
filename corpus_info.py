@@ -22,10 +22,10 @@ def info(corpus_file, topn=30):
     corpus = open(corpus_file).read()
     print("striping html tags")
     soup = BeautifulSoup(corpus, 'html.parser')
-    del corpus
-    print("removing punctuations")
     clean_corpus = soup.get_text()
+    del corpus
     del soup
+    print("removing punctuations")
     clean_text = remove_punctuation(clean_corpus)
     del clean_corpus
     print("get the words list")
