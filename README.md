@@ -1,6 +1,8 @@
 # WikiDocsAligner: Wikipedia Documents Aligner 
 Align Wikipedia documents based on interlanguage links 
 
+## Compatability 
+This code is requires python 3.x 
 
 ## Installation
 
