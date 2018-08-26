@@ -49,6 +49,14 @@ to get information about the corpus (the most frequent words)
 
 ```python corpus_info.py data/arz.wiki```
 
+ The above command is not going to work in python 2.7 becuase in case of Python 2.7 , it doesnot support 'maketrans' attribute ,present in the file (corpus_info.py) at line 8.
+
+ To work that command properly it should  be replaced by -
+
+  ''' python3 corpus_info.py data/arz.wiki '''
+  
+   It works fine. (As 'maketrans' is supported in Python 3.x)
+
 
 ## Related projects
 This project is used to extract [Comparable Documents from Wikipedia](https://github.com/motazsaad/comparableWikiCoprus/)
